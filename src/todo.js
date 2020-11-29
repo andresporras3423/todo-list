@@ -1,5 +1,6 @@
-const todo = (title, description, dueDate, priority, projectId) => (
+const todo = (id, title, description, dueDate, priority, projectId) => (
     {
+      id,
       title,
       description,
       dueDate,

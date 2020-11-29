@@ -1,46 +1,78 @@
 import Project from './project';
 
-const menuLoad = () => ({
+const projectLoad = () => ({
   divContent: document.getElementById('content'),
-  divMenu: document.createElement('div'),
-  h3: document.createElement('h3'),
-  image: document.createElement('img'),
-  p: document.createElement('p'),
-  foodItems: [
-    Project('Asian crunch', '1200', 'asian-crunch', '6 crispy rice bites wrapped in fresh salmon with divorce sauce.'),
-    Project('Crab croquettes', '1500', 'crab-croquettes', 'Crispy crab bites accompanied by tartar sauce.'),
-    Project('Pig bath', '700', 'pig-bath', 'Traditional Asian steamed breads, filled with delicious caramelized pork for 4 hours to give it a deep flavor that contrasts with the color and texture of the vegetables..'),
-    Project('Pig gyozas', '1100', 'pig-gyozas', 'Crispy oriental empanadas stuffed with pork and vegetables accompanied by a sweet and sour mustard sauce.'),
-    Project('Shrimp bath', '1100', 'shrimp-bath', 'The same breads embracing inside some delicious and crunchy shrimp breaded in coconut, accompanied with mezclum, radish, cape gooseberry sauce and coconut milk.'),
-    Project('Sweet banana', '1800', 'sweet-banana', 'Ripe banana slices that wrap an incredible mix of Kani Osaki, Wakame, Japanese mayonnaise and togarashi (a spectacular mix of spices), served in a bath with house molasses.')
+  divProject: document.createElement('div'),
+  formProject: document.createElement('form'),
+  tableProjects: document.createElement('table'),
+  listProjects: [
+    Project(1, 'todo project', 'this is a todo web project'),
+    Project(2, 'restaurant project', 'this is a restaurant web project'),
+    Project(3, 'library project', 'this is a library web project')
 ],
-  loadDivMenu() {
+  loadDivProject() {
     this.divMenu.id = 'div1';
     this.divMenu.className = 'item-style margin-menu d-none';
     this.divContent.appendChild(this.divMenu);
     this.loadItems();
   },
-  loadItems() {
-    this.foodItems.forEach((item) => {
-      const divItem = document.createElement('div');
-      divItem.className = 'item-style border-items';
-      const name = document.createElement('h4');
-      name.innerText = item.name;
-      const price = document.createElement('h6');
-      price.innerText = `price: $${item.price}`;
-      const description = document.createElement('p');
-      description.innerText = item.description;
-      const divImage = document.createElement('div');
-      const image = document.createElement('img');
-      image.src = `../data/sushi-images/${item.image}.jpg`;
-      divImage.appendChild(image);
-      divItem.appendChild(name);
-      divItem.appendChild(price);
-      divItem.appendChild(description);
-      divItem.appendChild(divImage);
-      this.divMenu.appendChild(divItem);
-    });
+  loadForm(){
+   const labelName = document.createElement('label');
+   const inputName = document.createElement('input');
+   const labelDesc = document.createElement('label');
+   const textAreaDesc = document.createElement('textarea');
+   const inputSubmit = document.createElement("input");
+   labelName.innerText="Name";
+   inputName.type=text;
+   inputName.placeholder="Project name";
+   labelDesc.innerText="Description";
+   textAreaDesc.placeholder="Project description";
+   inputSubmit.type="submit";
+   inputSubmit.value="submit";
+   this.formProject.appendChild(labelName);
+   this.formProject.appendChild(inputName);
+   this.formProject.appendChild(labelDesc);
+   this.formProject.appendChild(textAreaDesc);
+   this.formProject.appendChild(inputSubmit);
   },
+  loadTable(){
+    this.loadTableHead();
+  },
+  loadTableHead(){
+    const tHead = document.createElement('thead');
+    const tr = document.createElement("tr");
+    const titleHead = document.createElement('th');
+    const watchHead = document.createElement('th');
+    const editHead = document.createElement('th');
+    const deleteHead = document.createElement('th');
+    titleHead.innerText="Project";
+    watchHead.innerText="Watch";
+    editHead.innerText="Edit";
+    deleteHead.innerText="Delete";
+    tr.appendChild(titleHead);
+    tr.appendChild(watchHead);
+    tr.appendChild(editHead);
+    tr.appendChild(deleteHead);
+    tHead.appendChild(tr);
+    this.tableProjects.appendChild(tHead);
+  },
+  loadTableBody(){
+    const tBody = document.createElement('tbody');
+    const tr = document.createElement("tr");
+    this.listProjects.forEach((project) => {
+      const tdProject = document.createElement('td');
+      const tdWatch = document.createElement('td');
+      const tdEdit = document.createElement('td');
+      const tdDelete = document.createElement('td');
+      tdProject.innerText=project.title;
+      tr.appendChild(tdProject);
+      tr.appendChild(tdWatch);
+      tr.appendChild(tdEdit);
+      tr.appendChild(tdDelete);
+      tBody.appendChild(tr);
+    });
+    this.tableProjects.appendChild(tBody);
+  }
 });
 
-export default menuLoad;
+export default projectLoad;

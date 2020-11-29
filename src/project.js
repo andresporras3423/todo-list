@@ -1,8 +1,8 @@
-const Project = (title, description, projectId) => (
+const Project = (projectId, name, description) => (
     {
-      title,
-      description,
-      projectId
+      projectId,
+      name,
+      description
     }
   );
   

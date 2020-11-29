@@ -1,10 +1,10 @@
 import pageLoad from './page-load';
 import homeLoad from './todo-tab';
-import menuLoad from './project-tab';
+import projectLoad from './project-tab';
 
 pageLoad().loadNav();
 homeLoad().loadDivHome();
-menuLoad().loadDivMenu();
+projectLoad().loadDivMenu();
 
 let activeIndex = 0;
 
