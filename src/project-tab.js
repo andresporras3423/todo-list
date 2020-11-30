@@ -11,10 +11,13 @@ const projectLoad = () => ({
     Project(3, 'library project', 'this is a library web project')
 ],
   loadDivProject() {
-    this.divMenu.id = 'div1';
-    this.divMenu.className = 'item-style margin-menu d-none';
-    this.divContent.appendChild(this.divMenu);
-    this.loadItems();
+    this.divProject.id = 'div1';
+    this.divProject.className = 'item-style margin-menu d-none';
+    this.formProject.classList.add("col-6");
+    this.tableProjects.classList.add("col-6");
+    this.divContent.appendChild(this.divProject);
+    this.loadForm();
+    this.loadTable();
   },
   loadForm(){
    const labelName = document.createElement('label');
@@ -23,7 +26,7 @@ const projectLoad = () => ({
    const textAreaDesc = document.createElement('textarea');
    const inputSubmit = document.createElement("input");
    labelName.innerText="Name";
-   inputName.type=text;
+   inputName.type="text";
    inputName.placeholder="Project name";
    labelDesc.innerText="Description";
    textAreaDesc.placeholder="Project description";
@@ -34,9 +37,12 @@ const projectLoad = () => ({
    this.formProject.appendChild(labelDesc);
    this.formProject.appendChild(textAreaDesc);
    this.formProject.appendChild(inputSubmit);
+   this.divProject.appendChild(this.formProject);
   },
   loadTable(){
     this.loadTableHead();
+    this.loadTableBody();
+    this.divProject.appendChild(this.tableProjects);
   },
   loadTableHead(){
     const tHead = document.createElement('thead');
@@ -58,13 +64,13 @@ const projectLoad = () => ({
   },
   loadTableBody(){
     const tBody = document.createElement('tbody');
-    const tr = document.createElement("tr");
     this.listProjects.forEach((project) => {
-      const tdProject = document.createElement('td');
-      const tdWatch = document.createElement('td');
-      const tdEdit = document.createElement('td');
-      const tdDelete = document.createElement('td');
-      tdProject.innerText=project.title;
+      let tr = document.createElement("tr");
+      let tdProject = document.createElement('td');
+      let tdWatch = document.createElement('td');
+      let tdEdit = document.createElement('td');
+      let tdDelete = document.createElement('td');
+      tdProject.innerText=project.name;
       tr.appendChild(tdProject);
       tr.appendChild(tdWatch);
       tr.appendChild(tdEdit);

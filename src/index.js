@@ -4,7 +4,7 @@ import projectLoad from './project-tab';
 
 pageLoad().loadNav();
 homeLoad().loadDivHome();
-projectLoad().loadDivMenu();
+projectLoad().loadDivProject();
 
 let activeIndex = 0;
 
