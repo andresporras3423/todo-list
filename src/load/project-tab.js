@@ -1,15 +1,11 @@
-import Project from './project';
+import projects from '../data/projects';
 
 const projectLoad = () => ({
   divContent: document.getElementById('content'),
   divProject: document.createElement('div'),
   formProject: document.createElement('form'),
   tableProjects: document.createElement('table'),
-  listProjects: [
-    Project(1, 'todo project', 'this is a todo web project'),
-    Project(2, 'restaurant project', 'this is a restaurant web project'),
-    Project(3, 'library project', 'this is a library web project')
-],
+  listProjects: projects().list,
   loadDivProject() {
     this.divProject.id = 'div1';
     this.divProject.className = 'item-style margin-menu d-none';

@@ -1,7 +1,7 @@
 import 'bootstrap';
-import pageLoad from './page-load';
-import homeLoad from './todo-tab';
-import projectLoad from './project-tab';
+import pageLoad from './load/page-load';
+import homeLoad from './load/todo-tab';
+import projectLoad from './load/project-tab';
 
 pageLoad().loadNav();
 homeLoad().loadDivHome();
