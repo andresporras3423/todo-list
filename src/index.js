@@ -1,3 +1,4 @@
+import 'bootstrap';
 import pageLoad from './page-load';
 import homeLoad from './todo-tab';
 import projectLoad from './project-tab';

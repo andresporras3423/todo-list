@@ -38,6 +38,8 @@ const projectLoad = () => ({
    this.formProject.appendChild(textAreaDesc);
    this.formProject.appendChild(inputSubmit);
    this.divProject.appendChild(this.formProject);
+   const formChildren = this.formProject.children;
+   Object.values(formChildren).forEach((child)=> child.classList.add("col-12"));
   },
   loadTable(){
     this.loadTableHead();
