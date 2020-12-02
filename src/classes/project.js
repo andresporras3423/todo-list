@@ -1,6 +1,6 @@
-const Project = (projectId, name, description) => (
+const Project = (id, name, description) => (
     {
-      projectId,
+      id,
       name,
       description
     }

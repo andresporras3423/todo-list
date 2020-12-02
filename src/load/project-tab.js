@@ -1,11 +1,11 @@
-import projects from '../data/projects';
+import projectLogic from '../logic/project-logic';
 
 const projectLoad = () => ({
   divContent: document.getElementById('content'),
   divProject: document.createElement('div'),
   formProject: document.createElement('form'),
   tableProjects: document.createElement('table'),
-  listProjects: projects().list,
+  listProjects: projectLogic().listProjects,
   loadDivProject() {
     this.divProject.id = 'div1';
     this.divProject.className = 'item-style margin-menu d-none';
@@ -61,14 +61,35 @@ const projectLoad = () => ({
     this.tableProjects.appendChild(tHead);
   },
   loadTableBody(){
+    function watchProject(index){
+      console.log(`hello index: ${index}`);
+    };
+    function editProject(index){
+      console.log(`hello index: ${index}`);
+    };
+    function deleteProject(index){
+      console.log(`hello index: ${index}`);
+    };
     const tBody = document.createElement('tbody');
-    this.listProjects.forEach((project) => {
+    Object.values(this.listProjects).forEach((project) => {
       let tr = document.createElement("tr");
       let tdProject = document.createElement('td');
       let tdWatch = document.createElement('td');
       let tdEdit = document.createElement('td');
       let tdDelete = document.createElement('td');
+      let btWatch = document.createElement('button');
+      let btEdit = document.createElement('button');
+      let btDelete = document.createElement('button');
+      btWatch.innerHTML="watch";
+      btEdit.innerHTML="edit";
+      btDelete.innerHTML="delete";
+      btWatch.onclick=function(){watchProject(project.id)};
+      btDelete.onclick=function(){deleteProject(project.id)};
+      btEdit.onclick=function(){editProject(project.id)};
       tdProject.innerText=project.name;
+      tdWatch.appendChild(btWatch);
+      tdEdit.appendChild(btEdit);
+      tdDelete.appendChild(btDelete);
       tr.appendChild(tdProject);
       tr.appendChild(tdWatch);
       tr.appendChild(tdEdit);
