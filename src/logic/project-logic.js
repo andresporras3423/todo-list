@@ -1,15 +1,15 @@
 import projects from '../data/projects';
 
 const projectLogic = () => ({
-  listProjects: projects(),
+  list: projects().list,
   addProjects(newProject) {
-    this.listProjects.push(newProject);
+    this.list[newProject.id]=newProject;
   },
   deleteProject(index){
-    delete this.listProjects[index];
+    delete this.list[index];
   },
   editProject(updatedProject){
-    this.listProjects[updatedProject.id] = updatedProject;
+    this.list[updatedProject.id] = updatedProject;
   }
 });
 

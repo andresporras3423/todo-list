@@ -5,7 +5,13 @@ const projectLoad = () => ({
   divProject: document.createElement('div'),
   formProject: document.createElement('form'),
   tableProjects: document.createElement('table'),
-  listProjects: projectLogic().listProjects,
+  projectLogic: projectLogic(),
+  labelName : document.createElement('label'),
+  inputName : document.createElement('input'),
+  labelDesc : document.createElement('label'),
+  textAreaDesc : document.createElement('textarea'),
+  inputSubmit : document.createElement("input"),
+  id: null,
   loadDivProject() {
     this.divProject.id = 'div1';
     this.divProject.className = 'item-style margin-menu d-none';
@@ -16,23 +22,19 @@ const projectLoad = () => ({
     this.loadTable();
   },
   loadForm(){
-   const labelName = document.createElement('label');
-   const inputName = document.createElement('input');
-   const labelDesc = document.createElement('label');
-   const textAreaDesc = document.createElement('textarea');
-   const inputSubmit = document.createElement("input");
-   labelName.innerText="Name";
-   inputName.type="text";
-   inputName.placeholder="Project name";
-   labelDesc.innerText="Description";
-   textAreaDesc.placeholder="Project description";
-   inputSubmit.type="submit";
-   inputSubmit.value="submit";
-   this.formProject.appendChild(labelName);
-   this.formProject.appendChild(inputName);
-   this.formProject.appendChild(labelDesc);
-   this.formProject.appendChild(textAreaDesc);
-   this.formProject.appendChild(inputSubmit);
+   let that = this;
+   this.labelName.innerText="Name";
+   this.inputName.type="text";
+   this.inputName.placeholder="Project name";
+   this.labelDesc.innerText="Description";
+   this.textAreaDesc.placeholder="Project description";
+   this.inputSubmit.type="submit";
+   this.inputSubmit.value="submit";
+   this.formProject.appendChild(this.labelName);
+   this.formProject.appendChild(this.inputName);
+   this.formProject.appendChild(this.labelDesc);
+   this.formProject.appendChild(this.textAreaDesc);
+   this.formProject.appendChild(this.inputSubmit);
    this.divProject.appendChild(this.formProject);
    const formChildren = this.formProject.children;
    Object.values(formChildren).forEach((child)=> child.classList.add("col-12"));
@@ -61,17 +63,9 @@ const projectLoad = () => ({
     this.tableProjects.appendChild(tHead);
   },
   loadTableBody(){
-    function watchProject(index){
-      console.log(`hello index: ${index}`);
-    };
-    function editProject(index){
-      console.log(`hello index: ${index}`);
-    };
-    function deleteProject(index){
-      console.log(`hello index: ${index}`);
-    };
+    this.tableProjects.innerHTML="";
     const tBody = document.createElement('tbody');
-    Object.values(this.listProjects).forEach((project) => {
+    Object.values(this.projectLogic.list).forEach((project) => {
       let tr = document.createElement("tr");
       let tdProject = document.createElement('td');
       let tdWatch = document.createElement('td');
@@ -83,9 +77,17 @@ const projectLoad = () => ({
       btWatch.innerHTML="watch";
       btEdit.innerHTML="edit";
       btDelete.innerHTML="delete";
-      btWatch.onclick=function(){watchProject(project.id)};
-      btDelete.onclick=function(){deleteProject(project.id)};
-      btEdit.onclick=function(){editProject(project.id)};
+      let that = this;
+      btWatch.onclick=function(){
+        that.completeForm(that.projectLogic.list[project.id]);
+        that.disabledForm(true);
+      };
+      btDelete.onclick=function(){
+        that.projectLogic.deleteProject(project.id);
+        that.loadTableBody();
+        that.cleanForm();
+      };
+      btEdit.onclick=function(){};
       tdProject.innerText=project.name;
       tdWatch.appendChild(btWatch);
       tdEdit.appendChild(btEdit);
@@ -97,6 +99,22 @@ const projectLoad = () => ({
       tBody.appendChild(tr);
     });
     this.tableProjects.appendChild(tBody);
+  },
+  cleanForm(){
+    this.inputName.value="";
+    this.textAreaDesc.value="";
+    this.id=null;
+    this.disabledForm(false);
+  },
+  completeForm(project){
+    this.inputName.value=project.name;
+    this.textAreaDesc.value=project.description;
+    this.id=project.id;
+  },
+  disabledForm(status){
+    this.inputName.disabled=status;
+    this.textAreaDesc.disabled=status;
+    this.inputSubmit.disabled=status;
   }
 });
 
