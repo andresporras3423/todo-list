@@ -1,10 +1,10 @@
 import 'bootstrap';
 import pageLoad from './load/page-load';
-import homeLoad from './load/todo-tab';
+import todoLoad from './load/todo-tab';
 import projectLoad from './load/project-tab';
 
 pageLoad().loadNav();
-homeLoad().loadDivHome();
+todoLoad().loadDivTodo();
 projectLoad().loadDivProject();
 
 let activeIndex = 0;
