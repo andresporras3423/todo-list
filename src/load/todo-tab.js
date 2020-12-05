@@ -1,4 +1,5 @@
 import todoLogic from '../logic/todo-logic';
+import projectLogic from '../logic/project-logic';
 
 const todoLoad = () => ({
   divContent: document.getElementById('content'),
@@ -6,14 +7,21 @@ const todoLoad = () => ({
   formTodo: document.createElement('form'),
   tableTodos: document.createElement('table'),
   todoLogic: todoLogic(),
+  projectLogic: projectLogic(),
   labelName : document.createElement('label'),
   inputName : document.createElement('input'),
   labelDesc : document.createElement('label'),
   textAreaDesc : document.createElement('textarea'),
+  labelSelect : document.createElement("label"),
+  selectProject : document.createElement("select"),
   inputSubmit : document.createElement("input"),
   inputClear : document.createElement("input"),
   tBody : document.createElement('tbody'),
   tHead : document.createElement('thead'),
+  // <select class="col-12 form-control" name="been-read" id="book-been-read">
+  //   <option value=1>Yes</option>
+  //   <option value=0>No</option>
+  // </select>
   id: null,
   loadDivTodo() {
     this.divTodo.id = 'div0';
@@ -31,13 +39,20 @@ const todoLoad = () => ({
    this.inputName.placeholder="Todo name";
    this.labelDesc.innerText="Description";
    this.textAreaDesc.placeholder="Todo description";
+   this.labelSelect.innerText="Project:";
    this.inputSubmit.type="submit";
    this.inputSubmit.value="save";
    this.inputClear.type="submit";
    this.inputClear.value="clear";
+   Object.values(this.projectLogic.list).forEach((project)=>{
+     const opt = document.createElement('option');
+     opt.value=project.id;
+     opt.innerHTML=project.name;
+     that.selectProject.appendChild(opt);
+   });
    this.inputSubmit.onclick=function(event){
      event.preventDefault();
-     that.todoLogic.saveProject(that.id, that.inputName.value, that.textAreaDesc.value);
+     that.todoLogic.saveTodo(that.id, that.inputName.value, that.textAreaDesc.value, that.selectProject.value);
      that.cleanForm();
      that.loadTableBody();
    }
@@ -45,10 +60,13 @@ const todoLoad = () => ({
     event.preventDefault();
     that.cleanForm();
    }
+   this.selectProject.value=-1;
    this.formTodo.appendChild(this.labelName);
    this.formTodo.appendChild(this.inputName);
    this.formTodo.appendChild(this.labelDesc);
    this.formTodo.appendChild(this.textAreaDesc);
+   this.formTodo.appendChild(this.labelSelect);
+   this.formTodo.appendChild(this.selectProject);
    this.formTodo.appendChild(this.inputSubmit);
    this.formTodo.appendChild(this.inputClear);
    this.divTodo.appendChild(this.formTodo);
@@ -120,17 +138,20 @@ const todoLoad = () => ({
   cleanForm(){
     this.inputName.value="";
     this.textAreaDesc.value="";
+    this.selectProject.value=-1;
     this.id=null;
     this.disabledForm(false);
   },
   completeForm(todo){
     this.inputName.value=todo.name;
     this.textAreaDesc.value=todo.description;
+    this.selectProject.value=todo.idProject;
     this.id=todo.id;
   },
   disabledForm(status){
     this.inputName.disabled=status;
     this.textAreaDesc.disabled=status;
+    this.selectProject.disabled=status;
     this.inputSubmit.disabled=status;
   }
 });
