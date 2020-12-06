@@ -52,7 +52,7 @@ const todoLoad = () => ({
    });
    this.inputSubmit.onclick=function(event){
      event.preventDefault();
-     that.todoLogic.saveTodo(that.id, that.inputName.value, that.textAreaDesc.value, that.selectProject.value);
+     that.todoLogic.saveTodo(Number(that.id), that.inputName.value, that.textAreaDesc.value, that.selectProject.value);
      that.cleanForm();
      that.loadTableBody();
    }

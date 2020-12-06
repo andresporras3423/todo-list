@@ -37,7 +37,7 @@ const projectLoad = () => ({
    this.inputClear.value="clear";
    this.inputSubmit.onclick=function(event){
      event.preventDefault();
-     that.projectLogic.saveProject(that.id, that.inputName.value, that.textAreaDesc.value);
+     that.projectLogic.saveProject(Number(that.id), that.inputName.value, that.textAreaDesc.value);
      that.cleanForm();
      that.loadTableBody();
    }
