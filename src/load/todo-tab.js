@@ -14,16 +14,16 @@ const todoLoad = () => ({
   textAreaDesc : document.createElement('textarea'),
   labelSelect : document.createElement("label"),
   selectProject : document.createElement("select"),
+  labelPriority : document.createElement("label"),
+  selectPriority : document.createElement("select"),
+  labelDuedate : document.createElement("label"),
+  inputDuedate : document.createElement("input"),
   inputSubmit : document.createElement("input"),
   inputClear : document.createElement("input"),
   tBody : document.createElement('tbody'),
   tHead : document.createElement('thead'),
-  // <select class="col-12 form-control" name="been-read" id="book-been-read">
-  //   <option value=1>Yes</option>
-  //   <option value=0>No</option>
-  // </select>
   id: null,
-  loadDivTodo() {
+  loadDiv() {
     this.divTodo.id = 'div0';
     this.divTodo.className = 'item-style margin-menu';
     this.formTodo.classList.add("col-6");
@@ -33,45 +33,78 @@ const todoLoad = () => ({
     this.loadTable();
   },
   loadForm(){
-   const that = this;
    this.labelName.innerText="Name";
    this.inputName.type="text";
    this.inputName.placeholder="Todo name";
    this.labelDesc.innerText="Description";
    this.textAreaDesc.placeholder="Todo description";
-   this.labelSelect.innerText="Project:";
-   this.inputSubmit.type="submit";
-   this.inputSubmit.value="save";
-   this.inputClear.type="submit";
-   this.inputClear.value="clear";
-   Object.values(this.projectLogic.list).forEach((project)=>{
-     const opt = document.createElement('option');
-     opt.value=project.id;
-     opt.innerHTML=project.name;
-     that.selectProject.appendChild(opt);
-   });
-   this.inputSubmit.onclick=function(event){
-     event.preventDefault();
-     that.todoLogic.saveTodo(Number(that.id), that.inputName.value, that.textAreaDesc.value, that.selectProject.value);
-     that.cleanForm();
-     that.loadTableBody();
-   }
-   this.inputClear.onclick=function(event){
-    event.preventDefault();
-    that.cleanForm();
-   }
-   this.selectProject.value=-1;
    this.formTodo.appendChild(this.labelName);
    this.formTodo.appendChild(this.inputName);
    this.formTodo.appendChild(this.labelDesc);
    this.formTodo.appendChild(this.textAreaDesc);
-   this.formTodo.appendChild(this.labelSelect);
-   this.formTodo.appendChild(this.selectProject);
-   this.formTodo.appendChild(this.inputSubmit);
-   this.formTodo.appendChild(this.inputClear);
+   this.loadSelectProject();
+   this.loadSelectPriority();
+   this.loadInputDuedate();
+   this.loadInputSubmit();
+   this.loadInputClear();
    this.divTodo.appendChild(this.formTodo);
    const formChildren = this.formTodo.children;
    Object.values(formChildren).forEach((child)=> child.classList.add("col-12"));
+  },
+  loadSelectProject(){
+    const that = this;
+    this.labelSelect.innerText="Project:";
+    Object.values(this.projectLogic.list).forEach((project)=>{
+      const opt = document.createElement('option');
+      opt.value=project.id;
+      opt.innerHTML=project.name;
+      that.selectProject.appendChild(opt);
+    });
+    this.selectProject.value=-1;
+   this.formTodo.appendChild(this.labelSelect);
+   this.formTodo.appendChild(this.selectProject);
+  },
+  loadSelectPriority(){
+    const that = this;
+    this.labelPriority.innerText="Priority: ";
+    ["low","medium","high"].forEach((prior, index)=>{
+      const opt = document.createElement('option');
+      opt.value=index;
+      opt.innerHTML=prior;
+      that.selectPriority.appendChild(opt);
+    });
+    this.selectPriority.value=-1;
+   this.formTodo.appendChild(this.labelPriority);
+   this.formTodo.appendChild(this.selectPriority);
+  },
+  loadInputDuedate(){
+    this.labelDuedate.innerText="due date: ";
+    this.inputDuedate.type="date";
+    this.inputDuedate.valueAsDate=new Date();
+    this.formTodo.appendChild(this.labelDuedate);
+    this.formTodo.appendChild(this.inputDuedate);
+  },
+  loadInputSubmit(){
+    const that = this;
+    this.inputSubmit.type="submit";
+    this.inputSubmit.value="save";
+    this.inputSubmit.onclick=function(event){
+      event.preventDefault();
+      that.todoLogic.saveTodo(Number(that.id), that.inputName.value, that.textAreaDesc.value, that.selectProject.value, that.selectPriority.value, that.inputDuedate.valueAsDate);
+      that.cleanForm();
+      that.loadTableBody();
+    }
+    this.formTodo.appendChild(this.inputSubmit);
+  },
+  loadInputClear(){
+    const that = this;
+    this.inputClear.type="submit";
+    this.inputClear.value="clear";
+    this.inputClear.onclick=function(event){
+      event.preventDefault();
+      that.cleanForm();
+    };
+    this.formTodo.appendChild(this.inputClear);
   },
   loadTable(){
     this.loadTableHead();
@@ -140,6 +173,8 @@ const todoLoad = () => ({
     this.textAreaDesc.value="";
     this.selectProject.value=-1;
     this.id=null;
+    this.selectPriority.value=-1;
+    this.inputDuedate.valueAsDate=new Date();
     this.disabledForm(false);
   },
   completeForm(todo){
@@ -147,11 +182,15 @@ const todoLoad = () => ({
     this.textAreaDesc.value=todo.description;
     this.selectProject.value=todo.idProject;
     this.id=todo.id;
+    this.selectPriority.value=todo.priority;
+    this.inputDuedate.valueAsDate=new Date(todo.duedate);
   },
   disabledForm(status){
     this.inputName.disabled=status;
     this.textAreaDesc.disabled=status;
     this.selectProject.disabled=status;
+    this.selectPriority.disabled=status;
+    this.inputDuedate.disabled=status;
     this.inputSubmit.disabled=status;
   }
 });

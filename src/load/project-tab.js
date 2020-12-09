@@ -1,3 +1,4 @@
+
 import projectLogic from '../logic/project-logic';
 
 const projectLoad = () => ({
@@ -15,15 +16,16 @@ const projectLoad = () => ({
   tBody : document.createElement('tbody'),
   tHead : document.createElement('thead'),
   id: null,
-  loadDivProject() {
+  loadDiv() {
     this.divProject.id = 'div1';
-    this.divProject.className = 'item-style margin-menu d-none';
+    this.divProject.className = 'item-style margin-menu';
     this.formProject.classList.add("col-6");
     this.tableProjects.classList.add("col-6");
     this.divContent.appendChild(this.divProject);
     this.loadForm();
     this.loadTable();
-  },
+  }
+  ,
   loadForm(){
    const that = this;
    this.labelName.innerText="Name";
@@ -54,7 +56,8 @@ const projectLoad = () => ({
    this.divProject.appendChild(this.formProject);
    const formChildren = this.formProject.children;
    Object.values(formChildren).forEach((child)=> child.classList.add("col-12"));
-  },
+  }
+  ,
   loadTable(){
     this.loadTableHead();
     this.loadTableBody();

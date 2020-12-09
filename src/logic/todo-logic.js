@@ -3,9 +3,9 @@ import todos from '../data/todos';
 
 const todoLogic = () => ({
   list: todos().list,
-  saveTodo(id, name, description, idProject){
-    if(id==null) this.addTodo(Todo(id, name, description, idProject));
-    else this.editTodo(Todo(id, name, description, idProject));
+  saveTodo(id, name, description, idProject, priority, duedate){
+    if(id==null) this.addTodo(Todo(id, name, description, idProject, priority, duedate));
+    else this.editTodo(Todo(id, name, description, idProject, priority, duedate));
   },
   addTodo(newTodo) {
     this.list[Math.max(...Object.keys(this.list))+1]=newTodo;
