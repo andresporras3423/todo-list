@@ -4,6 +4,7 @@ import projectLogic from '../logic/project-logic';
 const projectLoad = () => ({
   divContent: document.getElementById('content'),
   divProject: document.createElement('div'),
+  pMessage: document.createElement('p'),
   formProject: document.createElement('form'),
   tableProjects: document.createElement('table'),
   projectLogic: projectLogic(),
@@ -21,6 +22,8 @@ const projectLoad = () => ({
     this.divProject.className = 'item-style margin-menu';
     this.formProject.classList.add("col-6");
     this.tableProjects.classList.add("col-6");
+    this.pMessage.classList.add("col-12");
+    this.divProject.appendChild(this.pMessage);
     this.divContent.appendChild(this.divProject);
     this.loadForm();
     this.loadTable();
@@ -39,9 +42,13 @@ const projectLoad = () => ({
    this.inputClear.value="clear";
    this.inputSubmit.onclick=function(event){
      event.preventDefault();
-     that.projectLogic.saveProject(Number(that.id), that.inputName.value, that.textAreaDesc.value);
-     that.cleanForm();
-     that.loadTableBody();
+     const validMessage = that.projectLogic.validateProject(that.inputName.value, that.textAreaDesc.value);
+     if(validMessage=="") {
+       that.pMessage.innerText = that.projectLogic.saveProject(that.id, that.inputName.value, that.textAreaDesc.value);
+       that.cleanForm();
+       that.loadTableBody();
+     }
+       else that.pMessage.innerText=validMessage;
    }
    this.inputClear.onclick=function(event){
     event.preventDefault();

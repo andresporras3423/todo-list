@@ -2,7 +2,7 @@ import Todo from '../classes/todo';
 import todos from '../data/todos';
 
 const todoLogic = () => ({
-  list: todos().list,
+  list: todos,
   saveTodo(id, name, description, idProject, priority, duedate){
     if(id==null) this.addTodo(Todo(id, name, description, idProject, priority, duedate));
     else this.editTodo(Todo(id, name, description, idProject, priority, duedate));

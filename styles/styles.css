@@ -6,11 +6,11 @@
       flex-wrap: wrap;
 }
 
-.item-style > * {
+/* .item-style > * {
   -ms-flex-preferred-size: 50%;
       flex-basis: 50%;
   padding: 6px;
-}
+} */
 
 .border-items {
   border-left: 2px;

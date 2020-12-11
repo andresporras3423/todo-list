@@ -66,8 +66,9 @@ const todoLoad = () => ({
     });
     this.selectProject.onchange = function(){
       that.hTable.innerText = document.getElementById(`projectOpt${that.selectProject.value}`).innerText;
+      that.loadTableBodyContent();
     }
-    this.selectProject.value=1;
+    //this.selectProject.value=1;
    this.formTodo.appendChild(this.labelSelect);
    this.formTodo.appendChild(this.selectProject);
   },
@@ -99,7 +100,7 @@ const todoLoad = () => ({
       event.preventDefault();
       that.todoLogic.saveTodo(Number(that.id), that.inputName.value, that.textAreaDesc.value, that.selectProject.value, that.selectPriority.value, that.inputDuedate.valueAsDate);
       that.cleanForm();
-      that.loadTableBody();
+      that.loadTableBodyContent();
     }
     this.formTodo.appendChild(this.inputSubmit);
   },
@@ -143,9 +144,14 @@ const todoLoad = () => ({
     this.tableTodos.appendChild(this.tHead);
   },
   loadTableBody(){
+    this.loadTableBodyContent();
+    this.tableTodos.appendChild(this.tBody);
+  },
+  loadTableBodyContent(){
     this.tBody.innerHTML="";
     Object.values(this.todoLogic.list).forEach((todo) => {
-      let tr = document.createElement("tr");
+      if(todo.idProject==this.selectProject.value){
+        let tr = document.createElement("tr");
       let tdTodo = document.createElement('td');
       let tdWatch = document.createElement('td');
       let tdEdit = document.createElement('td');
@@ -163,7 +169,7 @@ const todoLoad = () => ({
       };
       btDelete.onclick=function(){
         that.todoLogic.deleteTodo(todo.id);
-        that.loadTableBody();
+        that.loadTableBodyContent();
         that.cleanForm();
       };
       btEdit.onclick=function(){
@@ -179,13 +185,12 @@ const todoLoad = () => ({
       tr.appendChild(tdEdit);
       tr.appendChild(tdDelete);
       this.tBody.appendChild(tr);
+      }
     });
-    this.tableTodos.appendChild(this.tBody);
   },
   cleanForm(){
     this.inputName.value="";
     this.textAreaDesc.value="";
-    this.selectProject.value=1;
     this.id=null;
     this.selectPriority.value=-1;
     this.inputDuedate.valueAsDate=new Date();
