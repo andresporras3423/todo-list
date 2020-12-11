@@ -4,6 +4,7 @@ import projectLogic from '../logic/project-logic';
 const todoLoad = () => ({
   divContent: document.getElementById('content'),
   divTodo: document.createElement('div'),
+  pMessage: document.createElement('p'),
   divTable: document.createElement('div'),
   formTodo: document.createElement('form'),
   hTable: document.createElement('h3'),
@@ -28,9 +29,11 @@ const todoLoad = () => ({
   loadDiv() {
     this.divTodo.id = 'div0';
     this.divTodo.className = 'item-style margin-menu';
+    this.pMessage.classList.add("col-12")
     this.formTodo.classList.add("col-6");
     this.divTable.classList.add("col-6");
     this.tableTodos.classList.add("col-12");
+    this.divTodo.appendChild(this.pMessage);
     this.divContent.appendChild(this.divTodo);
     this.loadForm();
     this.loadTable();
@@ -98,9 +101,15 @@ const todoLoad = () => ({
     this.inputSubmit.value="save";
     this.inputSubmit.onclick=function(event){
       event.preventDefault();
-      that.todoLogic.saveTodo(Number(that.id), that.inputName.value, that.textAreaDesc.value, that.selectProject.value, that.selectPriority.value, that.inputDuedate.valueAsDate);
-      that.cleanForm();
-      that.loadTableBodyContent();
+      const validMessage = that.todoLogic.validateTodo(that.inputName.value, that.textAreaDesc.value, that.selectPriority.value, that.selectProject.value);
+      if(validMessage==""){
+        that.pMessage.innerText =  that.todoLogic.saveTodo(that.id, that.inputName.value, that.textAreaDesc.value, that.selectProject.value, that.selectPriority.value, that.inputDuedate.valueAsDate);
+        that.cleanForm();
+        that.loadTableBodyContent();
+      }
+      else{
+        that.pMessage.innerText = validMessage;
+      }
     }
     this.formTodo.appendChild(this.inputSubmit);
   },
