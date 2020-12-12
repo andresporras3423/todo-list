@@ -11,140 +11,139 @@ const todoLoad = () => ({
   tableTodos: document.createElement('table'),
   todoLogic: todoLogic(),
   projectLogic: projectLogic(),
-  labelName : document.createElement('label'),
-  inputName : document.createElement('input'),
-  labelDesc : document.createElement('label'),
-  textAreaDesc : document.createElement('textarea'),
-  labelSelect : document.createElement("label"),
-  selectProject : document.createElement("select"),
-  labelPriority : document.createElement("label"),
-  selectPriority : document.createElement("select"),
-  labelDuedate : document.createElement("label"),
-  inputDuedate : document.createElement("input"),
-  inputSubmit : document.createElement("input"),
-  inputClear : document.createElement("input"),
-  tBody : document.createElement('tbody'),
-  tHead : document.createElement('thead'),
+  labelName: document.createElement('label'),
+  inputName: document.createElement('input'),
+  labelDesc: document.createElement('label'),
+  textAreaDesc: document.createElement('textarea'),
+  labelSelect: document.createElement('label'),
+  selectProject: document.createElement('select'),
+  labelPriority: document.createElement('label'),
+  selectPriority: document.createElement('select'),
+  labelDuedate: document.createElement('label'),
+  inputDuedate: document.createElement('input'),
+  inputSubmit: document.createElement('input'),
+  inputClear: document.createElement('input'),
+  tBody: document.createElement('tbody'),
+  tHead: document.createElement('thead'),
   id: null,
   loadDiv() {
     this.divTodo.id = 'div0';
     this.divTodo.className = 'item-style margin-menu';
-    this.pMessage.classList.add("col-12")
-    this.formTodo.classList.add("col-6");
-    this.divTable.classList.add("col-6");
-    this.tableTodos.classList.add("col-12");
+    this.pMessage.classList.add('col-12');
+    this.formTodo.classList.add('col-6');
+    this.divTable.classList.add('col-6');
+    this.tableTodos.classList.add('col-12');
     this.divTodo.appendChild(this.pMessage);
     this.divContent.appendChild(this.divTodo);
     this.loadForm();
     this.loadTable();
   },
-  loadForm(){
-  this.loadSelectProject();
-   this.labelName.innerText="Name";
-   this.inputName.type="text";
-   this.inputName.placeholder="Todo name";
-   this.labelDesc.innerText="Description";
-   this.textAreaDesc.placeholder="Todo description";
-   this.formTodo.appendChild(this.labelName);
-   this.formTodo.appendChild(this.inputName);
-   this.formTodo.appendChild(this.labelDesc);
-   this.formTodo.appendChild(this.textAreaDesc);
-   this.loadSelectPriority();
-   this.loadInputDuedate();
-   this.loadInputSubmit();
-   this.loadInputClear();
-   this.divTodo.appendChild(this.formTodo);
-   const formChildren = this.formTodo.children;
-   Object.values(formChildren).forEach((child)=> child.classList.add("col-12"));
+  loadForm() {
+    this.loadSelectProject();
+    this.labelName.innerText = 'Name';
+    this.inputName.type = 'text';
+    this.inputName.placeholder = 'Todo name';
+    this.labelDesc.innerText = 'Description';
+    this.textAreaDesc.placeholder = 'Todo description';
+    this.formTodo.appendChild(this.labelName);
+    this.formTodo.appendChild(this.inputName);
+    this.formTodo.appendChild(this.labelDesc);
+    this.formTodo.appendChild(this.textAreaDesc);
+    this.loadSelectPriority();
+    this.loadInputDuedate();
+    this.loadInputSubmit();
+    this.loadInputClear();
+    this.divTodo.appendChild(this.formTodo);
+    const formChildren = this.formTodo.children;
+    Object.values(formChildren).forEach((child) => child.classList.add('col-12'));
   },
-  loadSelectProject(){
+  loadSelectProject() {
     const that = this;
-    this.labelSelect.innerText="Current Project:";
-    Object.values(this.projectLogic.list).forEach((project)=>{
+    this.labelSelect.innerText = 'Current Project:';
+    Object.values(this.projectLogic.list).forEach((project) => {
       const opt = document.createElement('option');
-      opt.id=`projectOpt${project.id}`;
-      opt.value=project.id;
-      opt.innerHTML=project.name;
+      opt.id = `projectOpt${project.id}`;
+      opt.value = project.id;
+      opt.innerHTML = project.name;
       that.selectProject.appendChild(opt);
     });
-    this.selectProject.onchange = function(){
+    this.selectProject.onchange = function () {
       that.hTable.innerText = document.getElementById(`projectOpt${that.selectProject.value}`).innerText;
       that.loadTableBodyContent();
-    }
-    //this.selectProject.value=1;
-   this.formTodo.appendChild(this.labelSelect);
-   this.formTodo.appendChild(this.selectProject);
+    };
+    // this.selectProject.value=1;
+    this.formTodo.appendChild(this.labelSelect);
+    this.formTodo.appendChild(this.selectProject);
   },
-  loadSelectPriority(){
+  loadSelectPriority() {
     const that = this;
-    this.labelPriority.innerText="Priority: ";
-    ["low","medium","high"].forEach((prior, index)=>{
+    this.labelPriority.innerText = 'Priority: ';
+    ['low', 'medium', 'high'].forEach((prior, index) => {
       const opt = document.createElement('option');
-      opt.value=index;
-      opt.innerHTML=prior;
+      opt.value = index;
+      opt.innerHTML = prior;
       that.selectPriority.appendChild(opt);
     });
-    this.selectPriority.value=-1;
-   this.formTodo.appendChild(this.labelPriority);
-   this.formTodo.appendChild(this.selectPriority);
+    this.selectPriority.value = -1;
+    this.formTodo.appendChild(this.labelPriority);
+    this.formTodo.appendChild(this.selectPriority);
   },
-  loadInputDuedate(){
-    this.labelDuedate.innerText="due date: ";
-    this.inputDuedate.type="date";
-    this.inputDuedate.valueAsDate=new Date();
+  loadInputDuedate() {
+    this.labelDuedate.innerText = 'due date: ';
+    this.inputDuedate.type = 'date';
+    this.inputDuedate.valueAsDate = new Date();
     this.formTodo.appendChild(this.labelDuedate);
     this.formTodo.appendChild(this.inputDuedate);
   },
-  loadInputSubmit(){
+  loadInputSubmit() {
     const that = this;
-    this.inputSubmit.type="submit";
-    this.inputSubmit.value="save";
-    this.inputSubmit.onclick=function(event){
+    this.inputSubmit.type = 'submit';
+    this.inputSubmit.value = 'save';
+    this.inputSubmit.onclick = function (event) {
       event.preventDefault();
       const validMessage = that.todoLogic.validateTodo(that.inputName.value, that.textAreaDesc.value, that.selectPriority.value, that.selectProject.value);
-      if(validMessage==""){
-        that.pMessage.innerText =  that.todoLogic.saveTodo(that.id, that.inputName.value, that.textAreaDesc.value, that.selectProject.value, that.selectPriority.value, that.inputDuedate.valueAsDate);
+      if (validMessage == '') {
+        that.pMessage.innerText = that.todoLogic.saveTodo(that.id, that.inputName.value, that.textAreaDesc.value, that.selectProject.value, that.selectPriority.value, that.inputDuedate.valueAsDate);
         that.cleanForm();
         that.loadTableBodyContent();
-      }
-      else{
+      } else {
         that.pMessage.innerText = validMessage;
       }
-    }
+    };
     this.formTodo.appendChild(this.inputSubmit);
   },
-  loadInputClear(){
+  loadInputClear() {
     const that = this;
-    this.inputClear.type="submit";
-    this.inputClear.value="clear";
-    this.inputClear.onclick=function(event){
+    this.inputClear.type = 'submit';
+    this.inputClear.value = 'clear';
+    this.inputClear.onclick = function (event) {
       event.preventDefault();
       that.cleanForm();
     };
     this.formTodo.appendChild(this.inputClear);
   },
-  loadTable(){
+  loadTable() {
     this.loadTableTitle();
     this.loadTableHead();
     this.loadTableBody();
     this.divTable.appendChild(this.tableTodos);
     this.divTodo.appendChild(this.divTable);
   },
-  loadTableTitle(){
+  loadTableTitle() {
     this.hTable.innerText = document.getElementById(`projectOpt${this.selectProject.value}`).innerText;
-    this.hTable.classList.add("col-12");
+    this.hTable.classList.add('col-12');
     this.divTable.appendChild(this.hTable);
   },
-  loadTableHead(){
-    const tr = document.createElement("tr");
+  loadTableHead() {
+    const tr = document.createElement('tr');
     const titleHead = document.createElement('th');
     const watchHead = document.createElement('th');
     const editHead = document.createElement('th');
     const deleteHead = document.createElement('th');
-    titleHead.innerText="To do";
-    watchHead.innerText="Watch";
-    editHead.innerText="Edit";
-    deleteHead.innerText="Delete";
+    titleHead.innerText = 'To do';
+    watchHead.innerText = 'Watch';
+    editHead.innerText = 'Edit';
+    deleteHead.innerText = 'Delete';
     tr.appendChild(titleHead);
     tr.appendChild(watchHead);
     tr.appendChild(editHead);
@@ -152,75 +151,75 @@ const todoLoad = () => ({
     this.tHead.appendChild(tr);
     this.tableTodos.appendChild(this.tHead);
   },
-  loadTableBody(){
+  loadTableBody() {
     this.loadTableBodyContent();
     this.tableTodos.appendChild(this.tBody);
   },
-  loadTableBodyContent(){
-    this.tBody.innerHTML="";
+  loadTableBodyContent() {
+    this.tBody.innerHTML = '';
     Object.values(this.todoLogic.list).forEach((todo) => {
-      if(todo.idProject==this.selectProject.value){
-        let tr = document.createElement("tr");
-      let tdTodo = document.createElement('td');
-      let tdWatch = document.createElement('td');
-      let tdEdit = document.createElement('td');
-      let tdDelete = document.createElement('td');
-      let btWatch = document.createElement('button');
-      let btEdit = document.createElement('button');
-      let btDelete = document.createElement('button');
-      btWatch.innerHTML="watch";
-      btEdit.innerHTML="edit";
-      btDelete.innerHTML="delete";
-      let that = this;
-      btWatch.onclick=function(){
-        that.completeForm(that.todoLogic.list[todo.id]);
-        that.disabledForm(true);
-      };
-      btDelete.onclick=function(){
-        that.todoLogic.deleteTodo(todo.id);
-        that.loadTableBodyContent();
-        that.cleanForm();
-      };
-      btEdit.onclick=function(){
-        that.completeForm(that.todoLogic.list[todo.id]);
-        that.disabledForm(false);
-      };
-      tdTodo.innerText=todo.name;
-      tdWatch.appendChild(btWatch);
-      tdEdit.appendChild(btEdit);
-      tdDelete.appendChild(btDelete);
-      tr.appendChild(tdTodo);
-      tr.appendChild(tdWatch);
-      tr.appendChild(tdEdit);
-      tr.appendChild(tdDelete);
-      this.tBody.appendChild(tr);
+      if (todo.idProject == this.selectProject.value) {
+        const tr = document.createElement('tr');
+        const tdTodo = document.createElement('td');
+        const tdWatch = document.createElement('td');
+        const tdEdit = document.createElement('td');
+        const tdDelete = document.createElement('td');
+        const btWatch = document.createElement('button');
+        const btEdit = document.createElement('button');
+        const btDelete = document.createElement('button');
+        btWatch.innerHTML = 'watch';
+        btEdit.innerHTML = 'edit';
+        btDelete.innerHTML = 'delete';
+        const that = this;
+        btWatch.onclick = function () {
+          that.completeForm(that.todoLogic.list[todo.id]);
+          that.disabledForm(true);
+        };
+        btDelete.onclick = function () {
+          that.todoLogic.deleteTodo(todo.id);
+          that.loadTableBodyContent();
+          that.cleanForm();
+        };
+        btEdit.onclick = function () {
+          that.completeForm(that.todoLogic.list[todo.id]);
+          that.disabledForm(false);
+        };
+        tdTodo.innerText = todo.name;
+        tdWatch.appendChild(btWatch);
+        tdEdit.appendChild(btEdit);
+        tdDelete.appendChild(btDelete);
+        tr.appendChild(tdTodo);
+        tr.appendChild(tdWatch);
+        tr.appendChild(tdEdit);
+        tr.appendChild(tdDelete);
+        this.tBody.appendChild(tr);
       }
     });
   },
-  cleanForm(){
-    this.inputName.value="";
-    this.textAreaDesc.value="";
-    this.id=null;
-    this.selectPriority.value=-1;
-    this.inputDuedate.valueAsDate=new Date();
+  cleanForm() {
+    this.inputName.value = '';
+    this.textAreaDesc.value = '';
+    this.id = null;
+    this.selectPriority.value = -1;
+    this.inputDuedate.valueAsDate = new Date();
     this.disabledForm(false);
   },
-  completeForm(todo){
-    this.inputName.value=todo.name;
-    this.textAreaDesc.value=todo.description;
-    this.selectProject.value=todo.idProject;
-    this.id=todo.id;
-    this.selectPriority.value=todo.priority;
-    this.inputDuedate.valueAsDate=new Date(todo.duedate);
+  completeForm(todo) {
+    this.inputName.value = todo.name;
+    this.textAreaDesc.value = todo.description;
+    this.selectProject.value = todo.idProject;
+    this.id = todo.id;
+    this.selectPriority.value = todo.priority;
+    this.inputDuedate.valueAsDate = new Date(todo.duedate);
   },
-  disabledForm(status){
-    this.inputName.disabled=status;
-    this.textAreaDesc.disabled=status;
-    this.selectProject.disabled=status;
-    this.selectPriority.disabled=status;
-    this.inputDuedate.disabled=status;
-    this.inputSubmit.disabled=status;
-  }
+  disabledForm(status) {
+    this.inputName.disabled = status;
+    this.textAreaDesc.disabled = status;
+    this.selectProject.disabled = status;
+    this.selectPriority.disabled = status;
+    this.inputDuedate.disabled = status;
+    this.inputSubmit.disabled = status;
+  },
 });
 
 export default todoLoad;

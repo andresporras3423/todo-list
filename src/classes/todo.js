@@ -5,7 +5,7 @@ const Todo = (id, name, description, idProject, priority, duedate) => (
     description,
     idProject,
     priority,
-    duedate
+    duedate,
   }
 );
 
@@ -21,5 +21,5 @@ export default Todo;
 //       projectId
 //     }
 //   );
-  
+
 //   export default todo;

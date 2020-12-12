@@ -1,16 +1,8 @@
 .item-style {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
-
-/* .item-style > * {
-  -ms-flex-preferred-size: 50%;
-      flex-basis: 50%;
-  padding: 6px;
-} */
 
 .border-items {
   border-left: 2px;
@@ -32,19 +24,17 @@
   display: -ms-grid;
   display: grid;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   text-align: center;
 }
 
 .div-contact-styles {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .div-contact-styles > * {
@@ -55,4 +45,3 @@
 .margin-form-items > * {
   margin: 5px;
 }
-/*# sourceMappingURL=styles.css.map */
