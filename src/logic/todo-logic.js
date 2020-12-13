@@ -4,15 +4,16 @@ import todos from '../data/todos';
 const todoLogic = () => ({
   list: todos,
   saveTodo(id, name, description, idProject, priority, duedate) {
-    if (id == null) return this.addTodo(Todo(id, name, description, idProject, priority, duedate));
-    return this.editTodo(Todo(id, name, description, idProject, priority, duedate));
+    if (id == null) return this.addTodo(Todo(Number(id), name, description, idProject, priority, duedate));
+    return this.editTodo(Todo(Number(id), name, description, idProject, priority, duedate));
   },
-  validateTodo(name, description, priority, idProject) {
+  validateTodo(id, name, description, priority, idProject) {
     if (name === '' || description === '' || priority === -1) return 'Name, description and priority cannot be blank';
-    if (Object.values(this.list).some((to) => to.name === name && to.idProject === idProject)) return 'There is already a to-do with this name in the current project';
+    if (id===null && Object.values(this.list).some((to) => to.name === name && to.idProject === Number(idProject))) return 'There is already a to-do with this name in the current project';
     return '';
   },
   addTodo(newTodo) {
+    newTodo.id = Math.max(...Object.keys(this.list)) + 1;
     this.list[Math.max(...Object.keys(this.list)) + 1] = newTodo;
     return 'to-do succesfully saved';
   },

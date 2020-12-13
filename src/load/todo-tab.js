@@ -100,7 +100,8 @@ const todoLoad = () => ({
     this.inputSubmit.value = 'save';
     this.inputSubmit.onclick = function inputSubmitClick(event) {
       event.preventDefault();
-      const validMessage = that.todoLogic.validateTodo(that.inputName.value,
+      const validMessage = that.todoLogic.validateTodo(that.id,
+        that.inputName.value,
         that.textAreaDesc.value,
         that.selectPriority.value,
         that.selectProject.value);
@@ -108,7 +109,7 @@ const todoLoad = () => ({
         that.pMessage.innerText = that.todoLogic.saveTodo(that.id,
           that.inputName.value,
           that.textAreaDesc.value,
-          that.selectProject.value,
+          Number(that.selectProject.value),
           that.selectPriority.value,
           that.inputDuedate.valueAsDate);
         that.cleanForm();
@@ -165,7 +166,7 @@ const todoLoad = () => ({
   loadTableBodyContent() {
     this.tBody.innerHTML = '';
     Object.values(this.todoLogic.list).forEach((todo) => {
-      if (todo.idProject === this.selectProject.value) {
+      if (todo.idProject === Number(this.selectProject.value)) {
         const tr = document.createElement('tr');
         const tdTodo = document.createElement('td');
         const tdWatch = document.createElement('td');

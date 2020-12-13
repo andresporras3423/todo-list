@@ -41,7 +41,8 @@ const projectLoad = () => ({
     this.inputClear.value = 'clear';
     this.inputSubmit.onclick = function inputSubmitClick(event) {
       event.preventDefault();
-      const validMessage = that.projectLogic.validateProject(that.inputName.value,
+      const validMessage = that.projectLogic.validateProject(that.id,
+        that.inputName.value,
         that.textAreaDesc.value);
       if (validMessage === '') {
         that.pMessage.innerText = that.projectLogic.saveProject(that.id,

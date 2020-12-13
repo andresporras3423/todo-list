@@ -5,18 +5,19 @@ const projectLogic = () => ({
   list: projects,
   saveProject(id, name, description) {
     if (id == null) {
-      this.addProject(Project(id, name, description));
+      this.addProject(Project(Number(id), name, description));
       return 'Project successfully saved!';
     }
-    this.editProject(Project(id, name, description));
+    this.editProject(Project(Number(id), name, description));
     return 'Project successfully updated!';
   },
-  validateProject(name, description) {
+  validateProject(id, name, description) {
     if (name === '' || description === '') return 'name and description cannot be blank';
-    if (Object.values(this.list).some((pr) => pr.name === name)) return 'name already taken';
+    if (id===null && Object.values(this.list).some((pr) => pr.name === name)) return 'name already taken';
     return '';
   },
   addProject(newProject) {
+    newProject.id = Math.max(...Object.keys(this.list)) + 1;
     this.list[Math.max(...Object.keys(this.list)) + 1] = newProject;
   },
   deleteProject(index) {
