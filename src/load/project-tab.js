@@ -39,16 +39,19 @@ const projectLoad = () => ({
     this.inputSubmit.value = 'save';
     this.inputClear.type = 'submit';
     this.inputClear.value = 'clear';
-    this.inputSubmit.onclick = function (event) {
+    this.inputSubmit.onclick = function inputSubmitClick(event) {
       event.preventDefault();
-      const validMessage = that.projectLogic.validateProject(that.inputName.value, that.textAreaDesc.value);
-      if (validMessage == '') {
-        that.pMessage.innerText = that.projectLogic.saveProject(that.id, that.inputName.value, that.textAreaDesc.value);
+      const validMessage = that.projectLogic.validateProject(that.inputName.value,
+        that.textAreaDesc.value);
+      if (validMessage === '') {
+        that.pMessage.innerText = that.projectLogic.saveProject(that.id,
+          that.inputName.value,
+          that.textAreaDesc.value);
         that.cleanForm();
         that.loadTableBody();
       } else that.pMessage.innerText = validMessage;
     };
-    this.inputClear.onclick = function (event) {
+    this.inputClear.onclick = function inputClearClick(event) {
       event.preventDefault();
       that.cleanForm();
     };
@@ -99,16 +102,16 @@ const projectLoad = () => ({
       btEdit.innerHTML = 'edit';
       btDelete.innerHTML = 'delete';
       const that = this;
-      btWatch.onclick = function () {
+      btWatch.onclick = function buttonWatchClick() {
         that.completeForm(that.projectLogic.list[project.id]);
         that.disabledForm(true);
       };
-      btDelete.onclick = function () {
+      btDelete.onclick = function buttonDeleteClick() {
         that.projectLogic.deleteProject(project.id);
         that.loadTableBody();
         that.cleanForm();
       };
-      btEdit.onclick = function () {
+      btEdit.onclick = function buttonEditClick() {
         that.completeForm(that.projectLogic.list[project.id]);
         that.disabledForm(false);
       };

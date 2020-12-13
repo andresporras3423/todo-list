@@ -8,8 +8,8 @@ const todoLogic = () => ({
     return this.editTodo(Todo(id, name, description, idProject, priority, duedate));
   },
   validateTodo(name, description, priority, idProject) {
-    if (name == '' || description == '' || priority == -1) return 'Name, description and priority cannot be blank';
-    if (Object.values(this.list).some((to) => to.name == name && to.idProject == idProject)) return 'There is already a to-do with this name in the current project';
+    if (name === '' || description === '' || priority === -1) return 'Name, description and priority cannot be blank';
+    if (Object.values(this.list).some((to) => to.name === name && to.idProject === idProject)) return 'There is already a to-do with this name in the current project';
     return '';
   },
   addTodo(newTodo) {

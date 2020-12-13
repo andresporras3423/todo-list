@@ -5,7 +5,8 @@ const pageLoad = () => ({
   divContent: document.getElementById('content'),
   nav: document.createElement('nav'),
   divNav: document.createElement('div'),
-  divChildren: [function () { todoLoad().loadDiv(); }, function () { projectLoad().loadDiv(); }],
+  divChildren: [function tLoad() { todoLoad().loadDiv(); },
+    function pLoad() { projectLoad().loadDiv(); }],
   activeIndex: 0,
   loadNav() {
     this.nav.className = 'navbar navbar-expand-lg navbar-dark bg-dark';
@@ -16,7 +17,6 @@ const pageLoad = () => ({
       if (index === 0) a.className = 'tab-event nav-item nav-link cursor-pointer active';
       else a.className = 'tab-event nav-item nav-link cursor-pointer';
       a.id = `tab${index}`;
-      // a.onclick = 'updateContent()';
       this.divNav.appendChild(a);
     });
     this.nav.appendChild(this.divNav);

@@ -12,8 +12,8 @@ const projectLogic = () => ({
     return 'Project successfully updated!';
   },
   validateProject(name, description) {
-    if (name == '' || description == '') return 'name and description cannot be blank';
-    if (Object.values(this.list).some((pr) => pr.name == name)) return 'name already taken';
+    if (name === '' || description === '') return 'name and description cannot be blank';
+    if (Object.values(this.list).some((pr) => pr.name === name)) return 'name already taken';
     return '';
   },
   addProject(newProject) {

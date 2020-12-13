@@ -67,11 +67,10 @@ const todoLoad = () => ({
       opt.innerHTML = project.name;
       that.selectProject.appendChild(opt);
     });
-    this.selectProject.onchange = function () {
+    this.selectProject.onchange = function sProject() {
       that.hTable.innerText = document.getElementById(`projectOpt${that.selectProject.value}`).innerText;
       that.loadTableBodyContent();
     };
-    // this.selectProject.value=1;
     this.formTodo.appendChild(this.labelSelect);
     this.formTodo.appendChild(this.selectProject);
   },
@@ -99,11 +98,19 @@ const todoLoad = () => ({
     const that = this;
     this.inputSubmit.type = 'submit';
     this.inputSubmit.value = 'save';
-    this.inputSubmit.onclick = function (event) {
+    this.inputSubmit.onclick = function inputSubmitClick(event) {
       event.preventDefault();
-      const validMessage = that.todoLogic.validateTodo(that.inputName.value, that.textAreaDesc.value, that.selectPriority.value, that.selectProject.value);
-      if (validMessage == '') {
-        that.pMessage.innerText = that.todoLogic.saveTodo(that.id, that.inputName.value, that.textAreaDesc.value, that.selectProject.value, that.selectPriority.value, that.inputDuedate.valueAsDate);
+      const validMessage = that.todoLogic.validateTodo(that.inputName.value,
+        that.textAreaDesc.value,
+        that.selectPriority.value,
+        that.selectProject.value);
+      if (validMessage === '') {
+        that.pMessage.innerText = that.todoLogic.saveTodo(that.id,
+          that.inputName.value,
+          that.textAreaDesc.value,
+          that.selectProject.value,
+          that.selectPriority.value,
+          that.inputDuedate.valueAsDate);
         that.cleanForm();
         that.loadTableBodyContent();
       } else {
@@ -116,7 +123,7 @@ const todoLoad = () => ({
     const that = this;
     this.inputClear.type = 'submit';
     this.inputClear.value = 'clear';
-    this.inputClear.onclick = function (event) {
+    this.inputClear.onclick = function inputClearClick(event) {
       event.preventDefault();
       that.cleanForm();
     };
@@ -158,7 +165,7 @@ const todoLoad = () => ({
   loadTableBodyContent() {
     this.tBody.innerHTML = '';
     Object.values(this.todoLogic.list).forEach((todo) => {
-      if (todo.idProject == this.selectProject.value) {
+      if (todo.idProject === this.selectProject.value) {
         const tr = document.createElement('tr');
         const tdTodo = document.createElement('td');
         const tdWatch = document.createElement('td');
@@ -171,16 +178,16 @@ const todoLoad = () => ({
         btEdit.innerHTML = 'edit';
         btDelete.innerHTML = 'delete';
         const that = this;
-        btWatch.onclick = function () {
+        btWatch.onclick = function buttonWatchClick() {
           that.completeForm(that.todoLogic.list[todo.id]);
           that.disabledForm(true);
         };
-        btDelete.onclick = function () {
+        btDelete.onclick = function buttonDeleteClick() {
           that.todoLogic.deleteTodo(todo.id);
           that.loadTableBodyContent();
           that.cleanForm();
         };
-        btEdit.onclick = function () {
+        btEdit.onclick = function buttonEditClick() {
           that.completeForm(that.todoLogic.list[todo.id]);
           that.disabledForm(false);
         };
