@@ -1,12 +1,15 @@
 import todoLogic from '../logic/todo-logic';
 import projectLogic from '../logic/project-logic';
+import icons from '../data/icons';
 
 const todoLoad = () => ({
+  icons: icons,
   divContent: document.getElementById('content'),
   divTodo: document.createElement('div'),
   pMessage: document.createElement('p'),
   divTable: document.createElement('div'),
   formTodo: document.createElement('form'),
+  hForm: document.createElement('h4'),
   hTable: document.createElement('h3'),
   tableTodos: document.createElement('table'),
   todoLogic: todoLogic(),
@@ -30,8 +33,9 @@ const todoLoad = () => ({
     this.divTodo.id = 'div0';
     this.divTodo.className = 'item-style margin-menu';
     this.pMessage.classList.add('col-12');
-    this.formTodo.classList.add('col-6');
-    this.divTable.classList.add('col-6');
+    this.formTodo.classList.add('col-4');
+    this.divTable.classList.add('col-8');
+    this.divTable.classList.add('table');
     this.tableTodos.classList.add('col-12');
     this.divTodo.appendChild(this.pMessage);
     this.divContent.appendChild(this.divTodo);
@@ -39,6 +43,8 @@ const todoLoad = () => ({
     this.loadTable();
   },
   loadForm() {
+    this.hForm.innerText = 'Add a new to-do';
+    this.formTodo.appendChild(this.hForm);
     this.loadSelectProject();
     this.labelName.innerText = 'Name';
     this.inputName.type = 'text';
@@ -56,6 +62,13 @@ const todoLoad = () => ({
     this.divTodo.appendChild(this.formTodo);
     const formChildren = this.formTodo.children;
     Object.values(formChildren).forEach((child) => child.classList.add('col-12'));
+    const formInputs = this.formTodo.getElementsByTagName('input');
+    Object.values(formInputs).forEach((input) => {
+      if (input.type === 'submit') {
+        input.classList.add('btn');
+        input.classList.add('btn-primary');
+      } else input.classList.add('form-control');
+    });
   },
   loadSelectProject() {
     const that = this;
@@ -156,6 +169,7 @@ const todoLoad = () => ({
     tr.appendChild(watchHead);
     tr.appendChild(editHead);
     tr.appendChild(deleteHead);
+    this.tHead.classList.add('thead-dark');
     this.tHead.appendChild(tr);
     this.tableTodos.appendChild(this.tHead);
   },
@@ -175,9 +189,12 @@ const todoLoad = () => ({
         const btWatch = document.createElement('button');
         const btEdit = document.createElement('button');
         const btDelete = document.createElement('button');
-        btWatch.innerHTML = 'watch';
-        btEdit.innerHTML = 'edit';
-        btDelete.innerHTML = 'delete';
+        btWatch.innerHTML = this.icons.len;
+        btEdit.innerHTML = this.icons.edit;
+        btDelete.innerHTML = this.icons.delete;
+        // btWatch.innerHTML = 'watch';
+        // btEdit.innerHTML = 'edit';
+        // btDelete.innerHTML = 'delete';
         const that = this;
         btWatch.onclick = function buttonWatchClick() {
           that.completeForm(that.todoLogic.list[todo.id]);

@@ -1,11 +1,14 @@
 
 import projectLogic from '../logic/project-logic';
+import icons from '../data/icons';
 
 const projectLoad = () => ({
+  icons: icons,
   divContent: document.getElementById('content'),
   divProject: document.createElement('div'),
   pMessage: document.createElement('p'),
   formProject: document.createElement('form'),
+  hForm: document.createElement('h4'),
   tableProjects: document.createElement('table'),
   projectLogic: projectLogic(),
   labelName: document.createElement('label'),
@@ -20,8 +23,9 @@ const projectLoad = () => ({
   loadDiv() {
     this.divProject.id = 'div1';
     this.divProject.className = 'item-style margin-menu';
-    this.formProject.classList.add('col-6');
-    this.tableProjects.classList.add('col-6');
+    this.formProject.classList.add('col-4');
+    this.tableProjects.classList.add('col-8');
+    this.tableProjects.classList.add('table');
     this.pMessage.classList.add('col-12');
     this.divProject.appendChild(this.pMessage);
     this.divContent.appendChild(this.divProject);
@@ -30,6 +34,8 @@ const projectLoad = () => ({
   },
   loadForm() {
     const that = this;
+    this.hForm.innerText = 'Add a new Project';
+    this.formProject.appendChild(this.hForm);
     this.labelName.innerText = 'Name';
     this.inputName.type = 'text';
     this.inputName.placeholder = 'Project name';
@@ -65,6 +71,13 @@ const projectLoad = () => ({
     this.divProject.appendChild(this.formProject);
     const formChildren = this.formProject.children;
     Object.values(formChildren).forEach((child) => child.classList.add('col-12'));
+    const formInputs = this.formProject.getElementsByTagName('input');
+    Object.values(formInputs).forEach((input) => {
+      if (input.type === 'submit') {
+        input.classList.add('btn');
+        input.classList.add('btn-primary');
+      } else input.classList.add('form-control');
+    });
   },
   loadTable() {
     this.loadTableHead();
@@ -85,6 +98,7 @@ const projectLoad = () => ({
     tr.appendChild(watchHead);
     tr.appendChild(editHead);
     tr.appendChild(deleteHead);
+    this.tHead.classList.add('thead-dark');
     this.tHead.appendChild(tr);
     this.tableProjects.appendChild(this.tHead);
   },
@@ -99,9 +113,9 @@ const projectLoad = () => ({
       const btWatch = document.createElement('button');
       const btEdit = document.createElement('button');
       const btDelete = document.createElement('button');
-      btWatch.innerHTML = 'watch';
-      btEdit.innerHTML = 'edit';
-      btDelete.innerHTML = 'delete';
+      btWatch.innerHTML = this.icons.len;
+      btEdit.innerHTML = this.icons.edit;
+      btDelete.innerHTML = this.icons.delete;
       const that = this;
       btWatch.onclick = function buttonWatchClick() {
         that.completeForm(that.projectLogic.list[project.id]);
