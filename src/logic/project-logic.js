@@ -28,12 +28,11 @@ const projectLogic = () => ({
     lStorage.saveProjects();
     lStorage.saveTodos();
   },
-  deleteRelatedTodos(index){
-    Object.keys(this.listTodos).forEach((i)=>{
-      if(this.listTodos[i].idProject===index) delete this.listTodos[i];
+  deleteRelatedTodos(index) {
+    Object.keys(this.listTodos).forEach((i) => {
+      if (this.listTodos[i].idProject === index) delete this.listTodos[i];
     });
-  }
-  ,
+  },
   editProject(updatedProject) {
     this.list[updatedProject.id] = updatedProject;
     lStorage.saveProjects();
