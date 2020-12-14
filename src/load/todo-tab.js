@@ -3,7 +3,7 @@ import projectLogic from '../logic/project-logic';
 import icons from '../data/icons';
 
 const todoLoad = () => ({
-  icons: icons,
+  icons,
   divContent: document.getElementById('content'),
   divTodo: document.createElement('div'),
   pMessage: document.createElement('p'),

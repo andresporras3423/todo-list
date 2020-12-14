@@ -1,3 +1,8 @@
+form > * {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .item-style {
   display: flex;
   -ms-flex-wrap: wrap;
@@ -44,9 +49,4 @@
 
 .margin-form-items > * {
   margin: 5px;
-}
-
-form > * {
-  margin-top: 5px;
-  margin-bottom: 5px;
 }

@@ -3,7 +3,7 @@ import projectLogic from '../logic/project-logic';
 import icons from '../data/icons';
 
 const projectLoad = () => ({
-  icons: icons,
+  icons,
   divContent: document.getElementById('content'),
   divProject: document.createElement('div'),
   pMessage: document.createElement('p'),
