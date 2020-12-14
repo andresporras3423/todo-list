@@ -1,8 +1,8 @@
 import Todo from '../classes/todo';
-import todos from '../data/todos';
+import lStorage from '../data/local-storage';
 
 const todoLogic = () => ({
-  list: todos,
+  list: lStorage.listTodos,
   saveTodo(id, name, description, idProject, priority, duedate) {
     if (id == null) {
       return this.addTodo(Todo(Number(id),
@@ -22,13 +22,16 @@ const todoLogic = () => ({
   addTodo(newTodo) {
     newTodo.id = Math.max(...Object.keys(this.list)) + 1;
     this.list[Math.max(...Object.keys(this.list)) + 1] = newTodo;
+    lStorage.saveTodos();
     return 'to-do succesfully saved';
   },
   deleteTodo(index) {
     delete this.list[index];
+    lStorage.saveTodos();
   },
   editTodo(updatedTodo) {
     this.list[updatedTodo.id] = updatedTodo;
+    lStorage.saveTodos();
     return 'to-do successfully updated';
   },
 });

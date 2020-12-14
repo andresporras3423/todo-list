@@ -1,8 +1,9 @@
 import Project from '../classes/project';
-import projects from '../data/projects';
+import lStorage from '../data/local-storage';
 
 const projectLogic = () => ({
-  list: projects,
+  list: lStorage.listProjects,
+  listTodos: lStorage.listTodos,
   saveProject(id, name, description) {
     if (id == null) {
       this.addProject(Project(Number(id), name, description));
@@ -19,12 +20,23 @@ const projectLogic = () => ({
   addProject(newProject) {
     newProject.id = Math.max(...Object.keys(this.list)) + 1;
     this.list[Math.max(...Object.keys(this.list)) + 1] = newProject;
+    lStorage.saveProjects();
   },
   deleteProject(index) {
     delete this.list[index];
+    this.deleteRelatedTodos(index);
+    lStorage.saveProjects();
+    lStorage.saveTodos();
   },
+  deleteRelatedTodos(index){
+    Object.keys(this.listTodos).forEach((i)=>{
+      if(this.listTodos[i].idProject===index) delete this.listTodos[i];
+    });
+  }
+  ,
   editProject(updatedProject) {
     this.list[updatedProject.id] = updatedProject;
+    lStorage.saveProjects();
   },
 });
 
