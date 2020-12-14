@@ -4,7 +4,6 @@ Third JavaScript Microverse Project By Oscar Russi
 
 ![screenshot](./todo-screenshot.png)
 
-
 # What it does
 
 - The website was built with JavaScript and Webpack
@@ -31,7 +30,7 @@ Third JavaScript Microverse Project By Oscar Russi
 
 # Live demo
 
-[Live Demo](https://andresporras3423.github.io/restaurant/dist/index.html)
+[Live Demo](https://andresporras3423.github.io/todo-list/dist/index.html)
 
 # How to run this project
 
