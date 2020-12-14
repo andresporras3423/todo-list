@@ -17,8 +17,8 @@ Third JavaScript Microverse Project By Oscar Russi
 - The project has the next folders: load, logic, data and classes 
 - The load folder contains the modules to edit the DOM
 - The logic folder contains the functions to work with the data
-- data folder contains the projects, to-dos and the icons
-- classes folder contains the todo class and project class
+- The data folder contains the projects, to-dos and the icons
+- The classes folder contains the todo class and project class
 
 
 # Build with
