@@ -7,17 +7,17 @@ Third JavaScript Microverse Project By Oscar Russi
 # What it does
 
 - The website was built with JavaScript and Webpack
-- The page let user to create to-dos for different projects
+- The page let the user create to-dos for different projects
 - Index page contains 2 tabs, the first one let you add new to-dos to any project
-- First tabs also shows a list of to-dos for the selected project
+- First tabs also show a list of to-dos for the selected project
 - User can watch, edit or delete a project
 - Second tab is to create new projects
-- Second tab has a similar structure of the first one, a form to add projects and a table with all the projects.
-- You can also watch, edit and delete projects.
-- The project has the next folders: load, logic, data and classes 
+- Second tab has a similar structure to the first one, a form to add projects and a table with all the projects.
+- You can also watch, edit, and delete projects.
+- The project has the next folders: load, logic, data, and classes 
 - The load folder contains the modules to edit the DOM
 - The logic folder contains the functions to work with the data
-- The data folder contains the projects, to-dos and the icons
+- The data folder contains the projects, to-dos, and the icons
 - The classes folder contains the todo class and project class
 
 
