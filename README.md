@@ -36,7 +36,8 @@ Third JavaScript Microverse Project By Oscar Russi
 
 - Download this project or install running the next command in the terminal: git clone https://github.com/andresporras3423/todo-list.git 
 - Move to the folder todo-list
-- In the terminal, run: npx webpack
+- In the terminal, run: npm init
+- In the terminal run: npm run start
 - Open in a browser the index.html file
 
 #### and deployed to GitHub
