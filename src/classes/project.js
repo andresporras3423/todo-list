@@ -1,9 +1,9 @@
-const Project = (id, name, description) => (
-  {
-    id,
-    name,
-    description,
+class Project {
+  constructor(id, name, description){
+      this.id = id;
+      this.name = name;
+      this.description = description;
   }
-);
+}
 
 export default Project;
