@@ -4,9 +4,7 @@ import localStorage from '../../mocks/localStorageMock'
 describe("Testing localStorage module", () => {
     beforeEach(() => {
         localStorage.clear();
-        console.log(localStorage);
         lStorage.loadData();
-        console.log(localStorage);
       });
     test("Check data is added to localStorage", () => {
         expect(localStorage!=={}).toEqual(true);
