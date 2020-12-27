@@ -1,7 +1,5 @@
 import localStorage from '../../mocks/localStorageMock';
 import lStorage from '../../src/data/local-storage';
-import projectLogic from '../../src/logic/project-logic';
-import Project from '../../src/classes/project';
 import todoLogic from '../../src/logic/todo-logic';
 import Todo from '../../src/classes/todo';
 
