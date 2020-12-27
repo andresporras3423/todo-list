@@ -47,4 +47,30 @@ describe("Testing todoLogic module", () => {
         todoLogic().addTodo(Todo(null,'new todo 30','description new todo 30',1,1,'10/10/2020'));
         expect(todoLogic().list[id+1]).toBeNull;
     });
+
+    test("Check if deleteTodo delete last added project", () => {
+        let id = Math.max(...Object.keys(todoLogic().list)) + 1;
+        todoLogic().addTodo(Todo(null,'new todo 30','description new todo 30',1,1,'10/10/2020'));
+        todoLogic().deleteTodo(id);
+        expect(todoLogic().list[id]).toBeNull;
+    });
+    test("Check if deleteTodo doesn't delete de previous project to the last one", () => {
+        let id = Math.max(...Object.keys(todoLogic().list)) + 1;
+        todoLogic().addTodo(Todo(null,'new todo 30','description new todo 30',1,1,'10/10/2020'));
+        todoLogic().deleteTodo(id);
+        expect(todoLogic().list[id-1]).not.toBeNull;
+    });
+
+    test("Check if editTodo update project name", () => {
+        let id = Math.max(...Object.keys(todoLogic().list)) + 1;
+        todoLogic().addTodo(Todo(null,'new todo 30','description new todo 30',1,1,'10/10/2020'));
+        todoLogic().editTodo(Todo(id,'new todo 31','description new todo 31',1,1,'10/10/2020'));
+        expect(todoLogic().list[id].name).toBe('new todo 31');
+    });
+    test("Check if name of project doesn't remain the same after editTodo", () => {
+        let id = Math.max(...Object.keys(todoLogic().list)) + 1;
+        todoLogic().addTodo(Todo(null,'new todo 30','description new todo 30',1,1,'10/10/2020'));
+        todoLogic().editTodo(Todo(id,'new todo 31','description new todo 32',2,2,'11/11/2021'));
+        expect(todoLogic().list[id].name).not.toBe('new todo 30');
+    });
   });
