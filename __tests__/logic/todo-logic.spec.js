@@ -1,4 +1,4 @@
-import localStorage from '../../mocks/localStorageMock';
+//import localStorage from '../../mocks/localStorageMock';
 import lStorage from '../../src/data/local-storage';
 import todoLogic from '../../src/logic/todo-logic';
 import Todo from '../../src/classes/todo';

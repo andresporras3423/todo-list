@@ -1,4 +1,4 @@
-import localStorage from '../../mocks/localStorageMock';
+//import localStorage from '../../mocks/localStorageMock';
 import lStorage from '../../src/data/local-storage';
 import projectLogic from '../../src/logic/project-logic';
 import Project from '../../src/classes/project';

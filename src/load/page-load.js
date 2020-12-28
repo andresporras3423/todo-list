@@ -11,6 +11,7 @@ const pageLoad = () => ({
   loadNav() {
     this.nav.className = 'navbar navbar-expand-lg navbar-dark bg-dark';
     this.divNav.className = 'navbar-nav';
+    console.log("hello world");
     ['To-dos', 'Projects'].forEach((item, index) => {
       const a = document.createElement('a');
       a.text = item;
