@@ -11,7 +11,6 @@ const pageLoad = () => ({
   loadNav() {
     this.nav.className = 'navbar navbar-expand-lg navbar-dark bg-dark';
     this.divNav.className = 'navbar-nav';
-    console.log("hello world");
     ['To-dos', 'Projects'].forEach((item, index) => {
       const a = document.createElement('a');
       a.text = item;
@@ -43,6 +42,7 @@ const pageLoad = () => ({
     const that = this;
     document.getElementById('tab0').onclick = function callUpdateContent() { that.updateContent(0); };
     document.getElementById('tab1').onclick = function callUpdateContent2() { that.updateContent(1); };
+    console.log(`tab0 has attribute?: ${document.getElementById('tab0').getAttribute("onclick")}`);
   },
 });
 export default pageLoad;
