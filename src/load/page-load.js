@@ -42,7 +42,6 @@ const pageLoad = () => ({
     const that = this;
     document.getElementById('tab0').onclick = function callUpdateContent() { that.updateContent(0); };
     document.getElementById('tab1').onclick = function callUpdateContent2() { that.updateContent(1); };
-    console.log(`tab0 has attribute?: ${document.getElementById('tab0').getAttribute("onclick")}`);
   },
 });
 export default pageLoad;

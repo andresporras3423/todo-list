@@ -10,12 +10,12 @@ describe("Testing pageLoad module", () => {
         localStorage.clear();
         lStorage.loadData();
       });
-    test("Check that two navbars element is added after calling loadNav() ", () => {
+    test("Check that two navbars element is added after calling loadNav()", () => {
         pageLoad().loadNav();
         const element = document.getElementsByClassName('navbar-nav');
         expect(element[1]).not.toBeNull();
     });
-    test("Check that second navbar element is not active after calling loadNav() ", () => {
+    test("Check that second navbar element is not active after calling loadNav()", () => {
         pageLoad().loadNav();
         const element = document.getElementsByClassName('navbar-nav');
         expect(element[1].classList.contains('active')).toBe(false);
