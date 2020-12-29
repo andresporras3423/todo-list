@@ -4,7 +4,7 @@ import projectLoad from '../../src/load/project-tab';
 import lStorage from '../../src/data/local-storage';
 import Project from '../../src/classes/project';
 
-describe("Testing pageLoad module", () => {
+describe("Testing projectLoad module", () => {
     const content = document.createElement('div');
     content.id="content";
     document.getElementsByTagName("body")[0].appendChild(content);
