@@ -19,7 +19,7 @@ JavaScript Microverse Project By Oscar Russi
 - The logic folder contains the functions to work with the data
 - The data folder contains the projects, to-dos, and the icons
 - The classes folder contains the todo class and project class
-- The project include jest tests for each method
+- The project includes Jest tests for each method
 
 # Build with
 
