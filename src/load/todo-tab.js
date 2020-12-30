@@ -192,9 +192,6 @@ const todoLoad = () => ({
         btWatch.innerHTML = this.icons.len;
         btEdit.innerHTML = this.icons.edit;
         btDelete.innerHTML = this.icons.delete;
-        // btWatch.innerHTML = 'watch';
-        // btEdit.innerHTML = 'edit';
-        // btDelete.innerHTML = 'delete';
         const that = this;
         btWatch.onclick = function buttonWatchClick() {
           that.completeForm(that.todoLogic.list[todo.id]);

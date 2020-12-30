@@ -106,6 +106,14 @@ describe("Testing todoLoad module", () => {
         tLoad.loadTableBody();
     }
 
+    let testLoadTableBodyContent = ()=>{
+        testLoadBeforeForm();
+        tLoad.loadForm();
+        tLoad.loadTableTitle();
+        tLoad.loadTableHead();
+        tLoad.loadTableBodyContent();
+    }
+
     beforeEach(() => {
         localStorage.clear();
         lStorage.loadData();
@@ -224,5 +232,49 @@ describe("Testing todoLoad module", () => {
     test("Check if type was assigned to the inputClear element", () => {
         testLoadTableBody();
         expect(tLoad.tBody.getElementsByTagName("td")[0]).toBeDefined;
+    });
+
+    test("Check if first button in tbody element has onclick event associated after loadTableBodyContent()", () => { 
+        testLoadTableBodyContent();
+        expect(typeof tLoad.tBody.getElementsByTagName("button")[0].onclick).toBe("function");
+    });
+    test("Check if second button in tbody element has onclick event associated after loadTableBodyContent()", () => {
+        testLoadTableBodyContent();
+        expect(typeof tLoad.tBody.getElementsByTagName("button")[1].onclick).not.toBe("object");
+    });
+    
+    test("Check that cleanForm() method remove value of inputName", () => { 
+        tLoad.loadDiv();
+        tLoad.inputName.value = 'oscar';
+        tLoad.cleanForm();
+        expect(tLoad.inputName.value).toBe("");
+    });
+    test("Check that cleanForm() method convert id to null", () => { 
+        tLoad.loadDiv();
+        tLoad.id = 10;
+        tLoad.cleanForm();
+        expect(tLoad.id).toBeNull;
+    });
+
+    test("Check that completeForm() method assign a value to inputName", () => { 
+        tLoad.loadDiv();
+        tLoad.completeForm(new Todo(10, "name", "description", 2, 2, "11/11/2011"));
+        expect(tLoad.inputName.value).toBe("name");
+    });
+    test("Check that completeForm() method assign a value to id", () => { 
+        tLoad.loadDiv();
+        tLoad.completeForm(new Todo(12, "name2", "description2", 2, 2, "11/11/2011"));
+        expect(tLoad.id).toBe(12);
+    });
+
+    test("Check that disabledForm() assigns true to inputName.disabled if receives true as parameter", () => { 
+        tLoad.loadDiv();
+        tLoad.disabledForm(true);
+        expect(tLoad.inputName.disabled).toBeTruthy;
+    });
+    test("Check that disabledForm() assigns false to textAreaDesc.disabled if receives false as parameter", () => { 
+        tLoad.loadDiv();
+        tLoad.disabledForm(false);
+        expect(tLoad.textAreaDesc.disabled).toBeFalsy;
     });
 });
