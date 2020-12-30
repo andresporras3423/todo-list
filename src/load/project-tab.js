@@ -1,4 +1,3 @@
-
 import projectLogic from '../logic/project-logic';
 import icons from '../data/icons';
 

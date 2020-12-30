@@ -1,6 +1,6 @@
 # to-do list Project
 
-Third JavaScript Microverse Project By Oscar Russi
+JavaScript Microverse Project By Oscar Russi
 
 ![screenshot](./todo-screenshot.png)
 
@@ -19,7 +19,7 @@ Third JavaScript Microverse Project By Oscar Russi
 - The logic folder contains the functions to work with the data
 - The data folder contains the projects, to-dos, and the icons
 - The classes folder contains the todo class and project class
-
+- The project includes Jest tests for each method
 
 # Build with
 
@@ -39,6 +39,9 @@ Third JavaScript Microverse Project By Oscar Russi
 - In the terminal, run: npm install
 - In the terminal run: npm run start
 - Open in a browser the index.html file
+
+# How to run the tests
+- run the next command in the terminal: npm test
 
 #### and deployed to GitHub
 
