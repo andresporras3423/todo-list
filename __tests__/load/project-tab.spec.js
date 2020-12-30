@@ -9,6 +9,29 @@ describe("Testing projectLoad module", () => {
     content.id="content";
     document.getElementsByTagName("body")[0].appendChild(content);
     let proLoad;
+
+    let testLoadForm = ()=>{
+        proLoad.divProject.id = 'div1';
+        proLoad.divProject.className = 'item-style margin-menu';
+        proLoad.formProject.classList.add('col-4');
+        proLoad.tableProjects.classList.add('col-8');
+        proLoad.tableProjects.classList.add('table');
+        proLoad.pMessage.classList.add('col-12');
+        proLoad.divProject.appendChild(proLoad.pMessage);
+        proLoad.divContent.appendChild(proLoad.divProject);
+        proLoad.loadForm();
+    }
+
+let testLoadTableHead = ()=>{
+    testLoadForm();
+    proLoad.loadTableHead();
+}
+let testLoadTableBody = ()=>{
+        testLoadForm();
+        proLoad.loadTableHead();
+        proLoad.loadTableBody();
+}
+
     beforeEach(() => {
         localStorage.clear();
         lStorage.loadData();
@@ -38,56 +61,24 @@ describe("Testing projectLoad module", () => {
     });
 
     test("Check that loadForm() add a label in the form", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
+        testLoadForm();
         const form = document.getElementsByTagName('form')[0];
         expect(form.getElementsByTagName("label")[0]).toBeDefined;
     });
     test("Check that loadForm() add a submit in the form", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
+        testLoadForm();
         const form = document.getElementsByTagName('form')[0];
         expect(form.getElementsByTagName("submit")[0]).not.toBeNull;
     });
 
     test("Check that loadTable() add a table", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
+        testLoadForm();
         proLoad.loadTable();
         const table = document.getElementsByTagName('table')[0];
         expect(table).toBeDefined;
     });
     test("Check that loadTable() add a tr tag to the table", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
+        testLoadForm();
         proLoad.loadTable();
         const table = document.getElementsByTagName('table')[0];
         expect(table.getElementsByTagName("tr")).not.toBeNull;
@@ -95,61 +86,23 @@ describe("Testing projectLoad module", () => {
 
 
     test("Check that loadTableHead() add a tr tag to the table", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
-        proLoad.loadTableHead();
+        testLoadTableHead();
         const thead = document.getElementsByTagName('thead')[0];
         expect(thead.getElementsByTagName("tr")).not.toBeNull;
     });
     test("Check that loadTableHead() add a th tag to the table", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
-        proLoad.loadTableHead();
+        testLoadTableHead();
         const thead = document.getElementsByTagName('thead')[0];
         expect(thead.getElementsByTagName("th")).toBeDefined;
     });
 
     test("Check that loadTableHead() add a tr tag to the table", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
-        proLoad.loadTableHead();
-        proLoad.loadTableBody();
+        testLoadTableBody();
         const tbody = document.getElementsByTagName('tbody')[0];
         expect(tbody.getElementsByTagName("tr")).not.toBeNull;
     });
     test("Check that loadTableHead() add a th tag to the table", () => { 
-        proLoad.divProject.id = 'div1';
-        proLoad.divProject.className = 'item-style margin-menu';
-        proLoad.formProject.classList.add('col-4');
-        proLoad.tableProjects.classList.add('col-8');
-        proLoad.tableProjects.classList.add('table');
-        proLoad.pMessage.classList.add('col-12');
-        proLoad.divProject.appendChild(proLoad.pMessage);
-        proLoad.divContent.appendChild(proLoad.divProject);
-        proLoad.loadForm();
-        proLoad.loadTableHead();
-        proLoad.loadTableBody();
+        testLoadTableBody();
         const tbody = document.getElementsByTagName('tbody')[0];
         expect(tbody.getElementsByTagName("td")).toBeDefined;
     });
