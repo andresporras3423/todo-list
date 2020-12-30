@@ -1,5 +1,4 @@
 import lStorage from '../../src/data/local-storage';
-//import localStorage from '../../mocks/localStorageMock';
 
 describe("Testing localStorage module", () => {
     beforeEach(() => {
